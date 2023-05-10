@@ -1,0 +1,68 @@
+Этот код на C++ демонстрирует реализацию алгоритма внешней сортировки. Внешняя сортировка используется, когда данные, подлежащие сортировке, слишком велики, чтобы поместиться в основной памяти, и поэтому требуют сортировки по частям с помощью внешнего хранилища.
+
+Вот подробное объяснение кода:
+
+Включает необходимые заголовочные файлы.
+Определяет пользовательский компаратор Compare для создания min кучи.
+Реализует функцию external_sort, которая принимает три аргумента: имя входного файла, имя выходного файла и размер буфера.
+Функцию external_sort можно разделить на две основные части:
+
+a) Чтение входного файла по фрагментам, их сортировка и сохранение отсортированных фрагментов во временных файлах:
+
+Открывает входной файл с помощью std::ifstream.
+Инициализирует пустой вектор строк с именем temp_files для хранения имен временных файлов.
+Инициализирует вектор с именем buffer с заданным размером буфера.
+Читает входной файл кусками (размер каждого куска определяется размером буфера).
+Для каждого куска сортирует элементы с помощью std::sort.
+Создает временный файл, записывает в него отсортированный кусок и добавляет имя файла в temp_files.
+Повторяет этот процесс, пока весь входной файл не будет прочитан и обработан.
+Закрывает входной файл.
+б) Слияние отсортированных временных файлов с помощью min кучи:
+
+Открывает выходной файл с помощью std::ofstream.
+Создает min-кучу с именем min_heap, используя std::priority_queue и пользовательский компаратор Compare.
+Инициализирует вектор объектов std::ifstream с именем temp_inputs для хранения входных потоков для временных файлов.
+Открывает каждый временный файл и выталкивает первый номер каждого файла в кучу min.
+Повторяет извлечение минимального числа из min кучи, записывает его в выходной файл и заталкивает следующее число из соответствующего временного файла в min кучу.
+Продолжает этот процесс до тех пор, пока куча min не станет пустой.
+Закрывает и удаляет все временные файлы.
+Основная функция:
+Задает имена входного и выходного файлов, а также размер буфера (который может быть скорректирован в зависимости от доступной оперативной памяти).
+Вызывает функцию external_sort с этими аргументами.
+Возвращает 0, что свидетельствует об успешном выполнении.
+Этот код по существу реализует алгоритм внешней сортировки слиянием для сортировки данных, хранящихся во входном файле, и записывает отсортированные данные в выходной файл, используя указанный размер буфера для контроля использования памяти.
+
+
+This C++ code demonstrates an implementation of an external sorting algorithm. External sorting is used when the data to be sorted is too large to fit into the main memory, and thus requires sorting in chunks with the help of external storage.
+
+Here's a detailed explanation of the code:
+
+Includes the required header files.
+Defines a custom comparator Compare for creating a min heap.
+Implements the external_sort function, which takes three arguments: the input file name, the output file name, and the buffer size.
+The external_sort function can be divided into two main parts:
+
+a) Reading the input file in chunks, sorting them, and saving sorted chunks into temporary files:
+
+Opens the input file using std::ifstream.
+Initializes an empty vector of strings named temp_files to store the names of temporary files.
+Initializes a vector named buffer with the given buffer size.
+Reads the input file in chunks (the size of each chunk is determined by the buffer size).
+For each chunk, sorts the elements using std::sort.
+Creates a temporary file, writes the sorted chunk to it, and adds the file name to temp_files.
+Repeats this process until the entire input file is read and processed.
+Closes the input file.
+b) Merging sorted temporary files using a min heap:
+
+Opens the output file using std::ofstream.
+Creates a min heap named min_heap using std::priority_queue and the custom comparator Compare.
+Initializes a vector of std::ifstream objects named temp_inputs to store the input streams for the temporary files.
+Opens each temporary file and pushes the first number of each file onto the min heap.
+Repeatedly pops the minimum number from the min heap, writes it to the output file, and pushes the next number from the corresponding temporary file onto the min heap.
+Continues this process until the min heap is empty.
+Closes and removes all temporary files.
+The main function:
+Specifies the input and output file names, and the buffer size (which can be adjusted based on available RAM).
+Calls the external_sort function with these arguments.
+Returns 0 to indicate successful execution.
+This code essentially implements an external merge sort algorithm to sort the data stored in the input file and writes the sorted data to the output file, using the specified buffer size to control memory usage.
