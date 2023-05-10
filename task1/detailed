@@ -33,6 +33,7 @@ a) Чтение входного файла по фрагментам, их со
 Этот код по существу реализует алгоритм внешней сортировки слиянием для сортировки данных, хранящихся во входном файле, и записывает отсортированные данные в выходной файл, используя указанный размер буфера для контроля использования памяти.
 
 
+
 This C++ code demonstrates an implementation of an external sorting algorithm. External sorting is used when the data to be sorted is too large to fit into the main memory, and thus requires sorting in chunks with the help of external storage.
 
 Here's a detailed explanation of the code:
