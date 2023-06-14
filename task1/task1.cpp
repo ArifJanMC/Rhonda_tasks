@@ -5,6 +5,7 @@
 #include <vector>
 #include <queue>
 #include <string>
+#include <chrono>
 
 // Comparator for min heap
 struct Compare {
@@ -75,7 +76,12 @@ int main() {
     std::string output_file = "output.txt";
     size_t buffer_size = 1024; // Adjust this value based on the available RAM
 
+    auto start = std::chrono::high_resolution_clock::now();
     external_sort(input_file, output_file, buffer_size);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double> diff = end-start;
+    std::cout << "Time taken by function: " << diff.count() << " seconds" << std::endl;
 
     return 0;
 }
